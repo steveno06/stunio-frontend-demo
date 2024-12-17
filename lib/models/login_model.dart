@@ -1,13 +1,13 @@
 class LoginCredentials{
-  final String email;
+  final String username;
   final String password;
-  LoginCredentials({required this.email, required this.password});
+  LoginCredentials({required this.username, required this.password});
 }
 
 class LoginResponse{
   final bool success;
   final String? error;
-  final String? userType;
+  final String? userId;
 
-  LoginResponse({required this.success, this.error, this.userType});
+  LoginResponse({required this.success, this.error, this.userId});
 }
