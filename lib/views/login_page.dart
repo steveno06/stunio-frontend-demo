@@ -34,6 +34,9 @@ class _LoginPageState extends State<LoginPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text("${viewModel.isLoading}"),
+                      Text("${viewModel.userId}"),
+                      Text("${viewModel.error}"),
                       TextField(
                         controller: _usernameController,
                         decoration: InputDecoration(hintText: "username", border: OutlineInputBorder()),
@@ -42,7 +45,9 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _passwordController,
                         decoration: InputDecoration(hintText: "password", border: OutlineInputBorder()),
                       ),
-                      TextButton(onPressed: (){}, child: Text("Login"))
+                      TextButton(onPressed: ()async{
+                        final success = await viewModel.login(_usernameController.text, _passwordController.text);
+                      }, child: Text("Login"))
                     ],)
                 ),
               )
