@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stunio_frontend/views/signup_page.dart';
 import '../viewmodels/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override 
+  @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
@@ -47,7 +48,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(onPressed: ()async{
                         final success = await viewModel.login(_usernameController.text, _passwordController.text);
-                      }, child: Text("Login"))
+                      }, child: Text("Login")
+                      ),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> SignupPage()));
+                      },
+                      child: Text("Sign up"),)
                     ],)
                 ),
               )
