@@ -29,7 +29,23 @@ class _LoginPageState extends State<LoginPage> {
         child: Consumer<LoginViewModel>(
           builder: (context, viewModel, _){
             return(
-              Center(child: Text("${viewModel.isLoading}"),)
+              Center(
+                child: (
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextField(
+                        controller: _usernameController,
+                        decoration: InputDecoration(hintText: "username", border: OutlineInputBorder()),
+                      ),
+                      TextField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(hintText: "password", border: OutlineInputBorder()),
+                      ),
+                      TextButton(onPressed: (){}, child: Text("Login"))
+                    ],)
+                ),
+              )
             );
           }
           )
