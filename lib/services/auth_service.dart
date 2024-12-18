@@ -3,7 +3,7 @@ import 'dart:convert';
 import "../models/login_model.dart";
 
 class AuthService{
-  static const String _baseUrl = "http://127.0.0.1:8000/";
+  static const String _baseUrl = "http://10.0.2.2:8000";
 
   Future<LoginResponse> login(LoginCredentials credentials) async {
     try{
@@ -12,10 +12,13 @@ class AuthService{
           '$_baseUrl/users/login'
           
           ),
-          body: {
+          headers: {
+          "Content-Type": "application/json", // Specify JSON content type
+          },
+          body: jsonEncode({
             "username": credentials.username,
             "password": credentials.password
-          }
+          })
       );
 
       final data = json.decode(response.body);

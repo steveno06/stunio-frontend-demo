@@ -7,7 +7,7 @@ class LoginCredentials{
 class LoginResponse{
   final bool success;
   final String? error;
-  final String? userId;
+  final int? userId;
 
   LoginResponse({required this.success, this.error, this.userId});
 }

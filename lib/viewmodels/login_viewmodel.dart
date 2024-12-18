@@ -7,11 +7,11 @@ class LoginViewModel extends ChangeNotifier{
 
   bool _isLoading = false;
   String? _error;
-  String? _userId;
+  int? _userId;
 
   bool get isLoading => _isLoading;
   String? get error => _error;
-  String? get userId => _userId;
+  int? get userId => _userId;
 
   Future<bool> login(String username, String password) async {
     _isLoading = true;
