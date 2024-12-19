@@ -17,7 +17,19 @@ enum RegisterSection{
 
 class SignupViewmodel extends ChangeNotifier{
   final AuthService _authService = AuthService();
-  
+  bool _isLoading = false;
+  String? _error;
+  int? _userId;
+  String? _userTypeResponse;
+
+  bool get isLoading => _isLoading;
+  String? get error => _error;
+  int? get userId => _userId;
+  String? get userTypeResponse => _userTypeResponse;
+
+
+
+
   RegisterSection _pageSection = RegisterSection.studentOrBusiness;
   UserType? _userType;
   //Common data
@@ -73,7 +85,8 @@ class SignupViewmodel extends ChangeNotifier{
   }
 
   Future<bool> register() async {
-    
+    _isLoading = true;
+    notifyListeners();
     UserRegisterFields user;
     try{
       if(_userType == UserType.student){
@@ -101,13 +114,17 @@ class SignupViewmodel extends ChangeNotifier{
       }
 
       final response = await _authService.register(user);
-
+      _isLoading = false;
       if(response.success){
-
+        _userId = response.userId;
+        _userTypeResponse = response.userType;
+        _error = null;
+        
       } else {
-        print(response.error);
+        _error = response.error;
       }
-
+      
+      notifyListeners();
       return response.success;
     }
     catch (e){
