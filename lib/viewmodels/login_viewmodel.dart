@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
 import '../services/auth_service.dart';
 import '../models/login_model.dart';
 

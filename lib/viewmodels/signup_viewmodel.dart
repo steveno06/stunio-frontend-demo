@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:stunio_frontend/models/register_model.dart';
 
 import '../services/auth_service.dart';

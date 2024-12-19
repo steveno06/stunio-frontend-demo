@@ -1,5 +1,3 @@
-import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
-
 class LoginCredentials{
   final String username;
   final String password;
