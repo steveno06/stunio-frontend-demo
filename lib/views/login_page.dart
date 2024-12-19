@@ -37,10 +37,6 @@ class _LoginPageState extends State<LoginPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("${viewModel.isLoading}"),
-                      Text("${viewModel.userId}"),
-                      Text("${viewModel.userType}"),
-                      Text("${viewModel.error}"),
                       TextField(
                         controller: _usernameController,
                         decoration: InputDecoration(hintText: "username", border: OutlineInputBorder()),
