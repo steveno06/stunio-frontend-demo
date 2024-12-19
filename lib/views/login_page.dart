@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text("${viewModel.isLoading}"),
                       Text("${viewModel.userId}"),
+                      Text("${viewModel.userType}"),
                       Text("${viewModel.error}"),
                       TextField(
                         controller: _usernameController,
