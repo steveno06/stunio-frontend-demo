@@ -8,10 +8,12 @@ class LoginViewModel extends ChangeNotifier{
   bool _isLoading = false;
   String? _error;
   int? _userId;
+  String? _userType;
 
   bool get isLoading => _isLoading;
   String? get error => _error;
   int? get userId => _userId;
+  String? get userType => _userType;
 
   Future<bool> login(String username, String password) async {
     _isLoading = true;
@@ -27,6 +29,7 @@ class LoginViewModel extends ChangeNotifier{
 
       if(response.success){
         _userId = response.userId;
+        _userType = response.userType;
         _error = null;
       } else {
         _error = response.error;
