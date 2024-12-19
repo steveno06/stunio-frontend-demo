@@ -34,10 +34,12 @@ class RegisterResponse{
   final bool success;
   final String? error;
   final int? userId;
+  final String? userType;
 
   RegisterResponse({
     required this.success,
     this.error,
-    this.userId
+    this.userId,
+    this.userType
   });
 }

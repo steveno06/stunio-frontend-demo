@@ -1,3 +1,5 @@
+import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
+
 class LoginCredentials{
   final String username;
   final String password;
@@ -8,6 +10,7 @@ class LoginResponse{
   final bool success;
   final String? error;
   final int? userId;
+  final String? userType;
 
-  LoginResponse({required this.success, this.error, this.userId});
+  LoginResponse({required this.success, this.error, this.userId, this.userType});
 }
