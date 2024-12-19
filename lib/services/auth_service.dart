@@ -26,7 +26,7 @@ class AuthService{
       final data = json.decode(response.body);
 
       if(response.statusCode == 200){
-        return LoginResponse(success: true, userId: data['user_id']);
+        return LoginResponse(success: true, userId: data['user_id'], userType: data["user_type"]);
       } else {
         return LoginResponse(success: false, error: "Invalid Login");
       }
@@ -74,7 +74,7 @@ class AuthService{
 
       final data = jsonDecode(response.body);
       if(response.statusCode == 200){
-        return RegisterResponse(success: true);
+        return RegisterResponse(success: true, userId: data['user_id'], userType: data['user_type']);
       } else{
         return RegisterResponse(success: false, error: "Error registering user");
       }
