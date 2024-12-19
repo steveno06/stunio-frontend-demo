@@ -22,8 +22,6 @@ class _StudentDetailsState extends State<StudentDetails> {
     super.dispose();
   }
 
-  
-  
   @override
   Widget build(BuildContext context) {
     return Center(
