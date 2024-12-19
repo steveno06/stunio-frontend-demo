@@ -1,36 +1,28 @@
-class StudentRegisterFields{
+class UserRegisterFields{
   final String username;
   final String password;
   final String email;
-  final String school;
-  final String major;
-  final int graduationYear;
 
-  StudentRegisterFields({
+  final String? school;
+  final String? major;
+  final int? graduationYear;
+
+  final String? companyName;
+  final String? industry;
+  final int? companySize;
+
+  UserRegisterFields({
     required this.username, 
     required this.password, 
     required this.email, 
-    required this.school, 
-    required this.major, 
-    required this.graduationYear,
-  });
-}
 
-class BusinessRegisterFields{
-  final String username;
-  final String password;
-  final String email;
-  final String companyName;
-  final String industry;
-  final int companySize;
+    this.school,
+    this.major,
+    this.graduationYear,
 
-  BusinessRegisterFields({
-    required this.username,
-    required this.password,
-    required this.email,
-    required this.companyName,
-    required this.industry,
-    required this.companySize
+    this.companyName,
+    this.industry,
+    this.companySize
   });
 }
 
