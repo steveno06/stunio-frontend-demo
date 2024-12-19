@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
+import 'package:stunio_frontend/views/student_homepage.dart';
 
 class StudentDetails extends StatefulWidget {
   final SignupViewmodel viewModel;
@@ -41,13 +42,20 @@ class _StudentDetailsState extends State<StudentDetails> {
             controller: _graduationYearController,
             decoration: InputDecoration(hintText: "graduation year"),
           ),
-          TextButton(onPressed: (){
+          TextButton(onPressed: ()async {
             widget.viewModel.setStudentData(
               _schoolController.text, 
               _majorController.text, 
               int.parse(_graduationYearController.text)
             );
-            widget.viewModel.register();
+            await widget.viewModel.register().then((success){
+              if(success){
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(builder: (context)=>StudentHomepage(userId: widget.viewModel.userId!, userType: widget.viewModel.userTypeResponse!))
+                );
+              }
+            });
           }, child: Text("Create Student Account"))
         ],
       ),

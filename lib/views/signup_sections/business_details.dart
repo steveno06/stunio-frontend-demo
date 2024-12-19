@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
 
+import '../business_homepage.dart';
+
 class BusinessDetails extends StatefulWidget {
   final SignupViewmodel viewModel;
   const BusinessDetails({required this.viewModel, super.key});
@@ -41,12 +43,20 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             controller: _companySizeController,
             decoration: InputDecoration(hintText: "company size"),
           ),
-          TextButton(onPressed: (){
+          TextButton(onPressed: () async {
             widget.viewModel.setBusinessData(
               _companyNameController.text, 
               _industryController.text, 
               int.parse(_companySizeController.text
             ));
+            await widget.viewModel.register().then((success){
+              if(success){
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(builder: (context) => BusinessHomepage(userId: widget.viewModel.userId!, userType: widget.viewModel.userTypeResponse!))
+                );
+              }
+            });
           }, child: Text("Create Business Account"))
         ],
       ),
