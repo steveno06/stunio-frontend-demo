@@ -44,7 +44,7 @@ class _SignupPageState extends State<SignupPage> {
                   TextField(decoration: InputDecoration(hintText: "email address")),
                   TextField(decoration: InputDecoration(hintText: "password")),
                   TextButton(onPressed: (){
-                    viewModel.setCommonData("us", "asd@gmail.com", "pass");
+                    viewModel.setCommonData("us5", "asd5@gmail.com", "pass");
                     viewModel.nextSection();
                   }, child: Text("Next Steps"))
                 ],
@@ -65,6 +65,7 @@ class _SignupPageState extends State<SignupPage> {
                   TextField(decoration: InputDecoration(hintText: "graduation year")),
                   TextButton(onPressed: (){
                     viewModel.setStudentData("asd", "asd", 2030);
+                    viewModel.register();
                     //Call register service in the viewmodel
                   }, child: Text("Create Student Account"))
                 ],
@@ -82,7 +83,11 @@ class _SignupPageState extends State<SignupPage> {
                   TextField(decoration: InputDecoration(hintText: "company name")),
                   TextField(decoration: InputDecoration(hintText: "industry")),
                   TextField(decoration: InputDecoration(hintText: "company size")),
-                  TextButton(onPressed: (){}, child: Text("Create Business Account"))
+                  TextButton(onPressed: (){
+                    viewModel.setBusinessData("asd", "asd", 12);
+                    viewModel.register();
+                    
+                  }, child: Text("Create Business Account"))
                 ],
               ),
             )

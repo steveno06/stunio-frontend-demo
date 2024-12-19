@@ -1,4 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
+import 'package:stunio_frontend/models/register_model.dart';
+
+import '../services/auth_service.dart';
 enum UserType{
   student,
   business
@@ -12,13 +16,15 @@ enum RegisterSection{
 }
 
 class SignupViewmodel extends ChangeNotifier{
+  final AuthService _authService = AuthService();
+  
   RegisterSection _pageSection = RegisterSection.studentOrBusiness;
   UserType? _userType;
   //Common data
   String? _username;
   String? _password;
   String? _email;
-  
+
   //Student data
   String? _school;
   String? _major;
@@ -64,6 +70,49 @@ class SignupViewmodel extends ChangeNotifier{
     _companyName = companyName;
     _industry = industry;
     _companySize = companySize;
+  }
+
+  Future<bool> register() async {
+    
+    UserRegisterFields user;
+    try{
+      if(_userType == UserType.student){
+        user = UserRegisterFields(
+          username: _username!,
+          password: _password!,
+          email: _email!,
+          userType: _userType!,
+          school: _school,
+          major: _major, 
+          graduationYear: _graduationYear
+        );
+      } else if(_userType == UserType.business){
+        user = UserRegisterFields(
+          username: _username!, 
+          password: _password!, 
+          email: _email!,
+          userType: _userType!,
+          companyName: _companyName,
+          industry: _industry,
+          companySize: _companySize
+        );
+      } else{
+        return false;
+      }
+
+      final response = await _authService.register(user);
+
+      if(response.success){
+
+      } else {
+        print(response.error);
+      }
+
+      return response.success;
+    }
+    catch (e){
+      return false;
+    }
   }
 
 }

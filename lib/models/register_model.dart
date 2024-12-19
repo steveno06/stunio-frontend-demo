@@ -1,7 +1,10 @@
+import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
+
 class UserRegisterFields{
   final String username;
   final String password;
   final String email;
+  final UserType userType;
 
   final String? school;
   final String? major;
@@ -15,6 +18,7 @@ class UserRegisterFields{
     required this.username, 
     required this.password, 
     required this.email, 
+    required this.userType,
 
     this.school,
     this.major,
