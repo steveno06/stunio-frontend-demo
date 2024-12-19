@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stunio_frontend/views/business_homepage.dart';
 import 'package:stunio_frontend/views/signup_page.dart';
 import 'package:stunio_frontend/views/student_homepage.dart';
 import '../viewmodels/login_viewmodel.dart';
@@ -52,9 +53,18 @@ class _LoginPageState extends State<LoginPage> {
                         await viewModel.login(_usernameController.text, _passwordController.text).then(
                           (success){
                             if(success){
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> StudentHomepage(userId: viewModel.userId!, userType: viewModel.userType!)
-
-                              ));
+                              if(viewModel.userType == "STUDENT"){
+                                Navigator.pushReplacement(
+                                  context, 
+                                  MaterialPageRoute(builder: (context) => StudentHomepage(userId: viewModel.userId!, userType: viewModel.userType!))
+                                );
+                              } else if(viewModel.userType == "BUSINESS"){
+                                Navigator.pushReplacement(
+                                  context, 
+                                  MaterialPageRoute(builder: (context) => BusinessHomepage(userId: viewModel.userId!, userType: viewModel.userType!))
+                                );
+                              }
+                              
                             }
                           }
                         );
