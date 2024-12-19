@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stunio_frontend/views/signup_page.dart';
+import 'package:stunio_frontend/views/student_homepage.dart';
 import '../viewmodels/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,7 +49,18 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(hintText: "password", border: OutlineInputBorder()),
                       ),
                       TextButton(onPressed: ()async{
-                        final success = await viewModel.login(_usernameController.text, _passwordController.text);
+                        await viewModel.login(_usernameController.text, _passwordController.text).then(
+                          (success){
+                            if(success){
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> StudentHomepage(userId: viewModel.userId!, userType: viewModel.userType!)
+
+                              ));
+                            }
+                          }
+                        );
+                        
+                      
+
                       }, child: Text("Login")
                       ),
                       TextButton(onPressed: (){
