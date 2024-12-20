@@ -5,6 +5,7 @@ import 'package:stunio_frontend/services/job_service.dart';
 class StudentHomeViewmodel extends ChangeNotifier{
   final JobService _jobService = JobService();
   
+  int _currentIndex = 0;
   final int userId;
   final String userType;
 
@@ -15,6 +16,12 @@ class StudentHomeViewmodel extends ChangeNotifier{
   List<Job>? get activeJobs => _activeJobs;
   List<Job>? get invitedJobs => _invitedJobs;
   bool get isLoading => _isLoading;
+  int get currentIndex => _currentIndex;
+
+  void setCurrentIndex(int index){
+    _currentIndex = index;
+    notifyListeners();
+  }
 
   StudentHomeViewmodel({required this.userId, required this.userType});
 
