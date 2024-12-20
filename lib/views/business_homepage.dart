@@ -10,14 +10,47 @@ class BusinessHomepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => BusinessHomeViewmodel(userId: userId, userType: userType),
-      child: Scaffold(
-        body: Consumer(builder: (context, viewModel, _){
-          return Center(
-            child: Text("Welcome to the business home page ${userId}"),
+      create: (context){
+        final viewModel = BusinessHomeViewmodel(userId: userId, userType: userType);
+        viewModel.getBusinessJobs(userId);
+        return viewModel;
+      },
+      child: Consumer<BusinessHomeViewmodel>(
+        builder: (context, viewModel, _){
+          if(viewModel.jobs == null){
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+          return Scaffold(
+            body: Center(
+              child: Text("${viewModel.jobs!.length}"),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.9,
+                          maxHeight: MediaQuery.of(context).size.height * 0.8,
+                        ),
+                        child: Text("pop up")
+                      ),
+                    );
+                  },
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
           );
-        }),
-      ),
+        },
+        
+      )
+      
     );
   }
 }
