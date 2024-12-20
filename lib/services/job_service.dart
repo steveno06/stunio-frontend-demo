@@ -9,7 +9,7 @@ class JobService {
   Future<StudentJobResponse> getStudentJobs(int studentId) async {
     try{
       final response = await http.get(
-        Uri.parse('$_baseUrl/jobs/$studentId')
+        Uri.parse('$_baseUrl/jobs/student/$studentId')
       );
 
       final data = jsonDecode(response.body);
@@ -30,6 +30,26 @@ class JobService {
       }
     } catch (e){
       return StudentJobResponse(activeJobs: [], invitedJobs: [], success: false);
+    }
+  }
+
+  Future<BusinessJobResponse> getBusinessJobs(int businessId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$_baseUrl/jobs/business/$businessId')
+      );
+      final data = jsonDecode(response.body);
+
+      if(response.statusCode == 200){
+        final businessJobs = (data['business_jobs'] as List)
+        .map((jobJson) => BusinessJob.fromJson(jobJson))
+        .toList();
+
+        return BusinessJobResponse(success: true, businessJobs: businessJobs);
+      }
+      return BusinessJobResponse(success: false, businessJobs: []);
+    } catch (e) {
+      return BusinessJobResponse(success: false, businessJobs: []);
     }
   }
 }
