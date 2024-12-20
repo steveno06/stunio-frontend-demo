@@ -11,16 +11,24 @@ class StudentHomepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => StudentHomeViewmodel(userId: userId, userType: userType),
+      create: (context) {
+        final viewModel = StudentHomeViewmodel(userId: userId, userType: userType);
+        viewModel.get_student_jobs(userId);
+        return viewModel;
+      },
       child: Scaffold(
         body: Consumer<StudentHomeViewmodel>(
-          builder: (context, viewModel, _){
+          builder: (context, viewModel, _) {
+            if (viewModel.activeJobs == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            
             return Center(
-              child: Text("${viewModel.userId}   ${viewModel.userType}"),
+              child: Text("${viewModel.userId}   ${viewModel.activeJobs}"),
             );
           }
-          ),
+        ),
       ),
-      );
+    );
   }
 }
