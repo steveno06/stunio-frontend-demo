@@ -41,9 +41,9 @@ class BusinessJob{
   factory BusinessJob.fromJson(Map<String, dynamic> json){
     return BusinessJob(
       id: json['id'], 
-      title: json['id'], 
+      title: json['title'], 
       description: json['description'], 
-      date: json['event_data'], 
+      date: json['event_date'], 
       isBooked: json['is_booked']
     );
   }
