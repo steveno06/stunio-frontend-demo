@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
+import 'package:stunio_frontend/views/components/header_2.dart';
+import 'package:stunio_frontend/views/components/simple_button.dart';
+import 'package:stunio_frontend/views/components/simple_text_field.dart';
 import 'package:stunio_frontend/views/student_homepage.dart';
 
 class StudentDetails extends StatefulWidget {
@@ -29,21 +32,12 @@ class _StudentDetailsState extends State<StudentDetails> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Tell us more about you as a student!"),
-          TextField(
-            controller: _schoolController,
-            decoration: InputDecoration(hintText: "school"),
-          ),
-          TextField(
-            controller: _majorController,
-            decoration: InputDecoration(hintText: "major"),
-          ),
-          TextField(
-            controller: _graduationYearController,
-            decoration: InputDecoration(hintText: "graduation year"),
-          ),
-          TextButton(onPressed: ()async {
-            widget.viewModel.setStudentData(
+          Header2(label: "Tell us more about you as a student"),
+          SimpleTextField(fieldName: "School", inputController: _schoolController),
+          SimpleTextField(fieldName: "Major", inputController: _majorController),
+          SimpleTextField(fieldName: "Graduation Year", inputController: _graduationYearController),
+          SimpleButton(onPressed: () async {
+             widget.viewModel.setStudentData(
               _schoolController.text, 
               _majorController.text, 
               int.parse(_graduationYearController.text)
@@ -56,7 +50,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                 );
               }
             });
-          }, child: Text("Create Student Account"))
+          }, label: "Create Student Account")
         ],
       ),
     );
