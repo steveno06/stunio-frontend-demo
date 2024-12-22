@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stunio_frontend/viewmodels/signup_viewmodel.dart';
+import 'package:stunio_frontend/views/components/header_2.dart';
+import 'package:stunio_frontend/views/components/simple_button.dart';
 
 class Usertypeselection extends StatelessWidget {
   final SignupViewmodel viewModel;
@@ -12,15 +14,23 @@ class Usertypeselection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Welcome to Stunio! Are you a student or business?"),
-          TextButton(onPressed: (){
-            viewModel.setUserType(UserType.student);
-            viewModel.nextSection();
-          }, child: Text("Student")),
-          TextButton(onPressed: (){
-            viewModel.setUserType(UserType.business);
-            viewModel.nextSection();
-          }, child: Text("Business"))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: Header2(label: "Welcome to Stunio! Are you a student or business?"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SimpleButton(onPressed: (){
+                viewModel.setUserType(UserType.student);
+                viewModel.nextSection();
+              }, label: "Student"),
+              SimpleButton(onPressed: (){
+                viewModel.setUserType(UserType.business);
+                viewModel.nextSection();
+              }, label: "Business")
+            ],
+          )
         ],
       ),
     );
