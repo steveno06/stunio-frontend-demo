@@ -28,30 +28,39 @@ class _StudentDetailsState extends State<StudentDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Header2(label: "Tell us more about you as a student"),
-          SimpleTextField(fieldName: "School", inputController: _schoolController),
-          SimpleTextField(fieldName: "Major", inputController: _majorController),
-          SimpleTextField(fieldName: "Graduation Year", inputController: _graduationYearController),
-          SimpleButton(onPressed: () async {
-             widget.viewModel.setStudentData(
-              _schoolController.text, 
-              _majorController.text, 
-              int.parse(_graduationYearController.text)
-            );
-            await widget.viewModel.register().then((success){
-              if(success){
-                Navigator.pushReplacement(
-                  context, 
-                  MaterialPageRoute(builder: (context)=>StudentHomepage(userId: widget.viewModel.userId!, userType: widget.viewModel.userTypeResponse!))
+    return Padding(
+      padding: const EdgeInsets.all(14),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 14),
+              child: Header2(label: "Tell us more about you as a student"),
+            ),
+            SimpleTextField(fieldName: "School", inputController: _schoolController),
+            SimpleTextField(fieldName: "Major", inputController: _majorController),
+            SimpleTextField(fieldName: "Graduation Year", inputController: _graduationYearController),
+            Padding(
+              padding: const EdgeInsets.only(top: 14),
+              child: SimpleButton(onPressed: () async {
+                 widget.viewModel.setStudentData(
+                  _schoolController.text, 
+                  _majorController.text, 
+                  int.parse(_graduationYearController.text)
                 );
-              }
-            });
-          }, label: "Create Student Account")
-        ],
+                await widget.viewModel.register().then((success){
+                  if(success){
+                    Navigator.pushReplacement(
+                      context, 
+                      MaterialPageRoute(builder: (context)=>StudentHomepage(userId: widget.viewModel.userId!, userType: widget.viewModel.userTypeResponse!))
+                    );
+                  }
+                });
+              }, label: "Create Student Account"),
+            )
+          ],
+        ),
       ),
     );
   }
