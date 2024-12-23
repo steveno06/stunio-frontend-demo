@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stunio_frontend/viewmodels/business_home_viewmodel.dart';
+import 'package:stunio_frontend/views/business_sections/business_jobs.dart';
 
 class BusinessHomepage extends StatelessWidget {
   final int userId;
@@ -24,7 +25,7 @@ class BusinessHomepage extends StatelessWidget {
           }
           return Scaffold(
             body: Center(
-              child: Text("${viewModel.jobs!.length}"),
+              child: BusinessJobs(jobs: viewModel.jobs!),
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: (){
