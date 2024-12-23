@@ -52,4 +52,33 @@ class JobService {
       return BusinessJobResponse(success: false, businessJobs: []);
     }
   }
+
+  Future<bool> createJob(String title, String description, String eventDate, int userId, int requiredStudents) async {
+    try {
+      final response = await http.post(
+        Uri.parse(
+          '$_baseUrl/jobs/create'
+          
+          ),
+          headers: {
+          "Content-Type": "application/json", // Specify JSON content type
+          },
+          body: jsonEncode({
+            "title": title,
+            "description": description,
+            "event_date": eventDate,
+            "user_id": userId,
+            "required_students": requiredStudents
+          })
+      );
+
+      if(response.statusCode == 200){
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

@@ -40,7 +40,9 @@ class BusinessHomepage extends StatelessWidget {
                           maxWidth: MediaQuery.of(context).size.width * 0.9,
                           maxHeight: MediaQuery.of(context).size.height * 0.8,
                         ),
-                        child: CreateBusinessJob(viewModel: viewModel)
+                        child: CreateBusinessJob(
+                          viewModel: viewModel, 
+                          onClose: () => Navigator.pop(context))
                       ),
                     );
                   },

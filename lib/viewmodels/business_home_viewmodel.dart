@@ -40,4 +40,16 @@ class BusinessHomeViewmodel extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> createBusinessJob(String title, String description, String eventDate, int userId, int requiredStudents) async {
+    try{
+      final response = await _jobService.createJob(title, description, eventDate, userId, requiredStudents);
+      if(response){
+        return true;
+      }
+      return false;
+    } catch (e){
+      return false;
+    }
+  }
 }

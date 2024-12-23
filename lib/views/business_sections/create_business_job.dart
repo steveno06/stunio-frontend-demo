@@ -5,7 +5,8 @@ import 'package:stunio_frontend/views/components/simple_button.dart';
 import 'package:stunio_frontend/views/components/simple_text_field.dart';
 
 class CreateBusinessJob extends StatefulWidget {
-  const CreateBusinessJob({super.key, required this.viewModel});
+  const CreateBusinessJob({super.key, required this.viewModel, required this.onClose});
+  final VoidCallback onClose;
   final BusinessHomeViewmodel viewModel;
 
   @override
@@ -19,6 +20,14 @@ class _CreateBusinessJobState extends State<CreateBusinessJob> {
   final _requiredStudentsController = TextEditingController();
   final _dateController = TextEditingController();
 
+  @override
+  void dispose() {
+    _eventTitleController.dispose();
+    _descriptionController.dispose();
+    _requiredStudentsController.dispose();
+    _dateController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +45,19 @@ class _CreateBusinessJobState extends State<CreateBusinessJob> {
           SimpleTextField(fieldName: "Date", inputController: _dateController),
           Padding(
             padding: const EdgeInsets.only(top: 14),
-            child: SimpleButton(onPressed: () {}, label: "Create Job"),
+            child: SimpleButton(onPressed: () async {
+              final isSuccess = await  widget.viewModel.createBusinessJob(
+                _eventTitleController.text, 
+                _descriptionController.text, 
+                _dateController.text, 
+                widget.viewModel.userId, 
+                int.parse(_requiredStudentsController.text));
+
+                if(isSuccess){
+                  widget.viewModel.getBusinessJobs(widget.viewModel.userId);
+                  widget.onClose();
+                }
+            }, label: "Create Job"),
           )
         ],
       ),
