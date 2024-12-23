@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:stunio_frontend/models/job_model.dart';
 import 'package:stunio_frontend/services/job_service.dart';
 
@@ -37,6 +36,18 @@ class BusinessHomeViewmodel extends ChangeNotifier {
     } catch (e) {
       _isLoading = false;
       notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> createBusinessJob(String title, String description, String eventDate, int userId, int requiredStudents) async {
+    try{
+      final response = await _jobService.createJob(title, description, eventDate, userId, requiredStudents);
+      if(response){
+        return true;
+      }
+      return false;
+    } catch (e){
       return false;
     }
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stunio_frontend/viewmodels/student_home_viewmodel.dart';
+import 'package:stunio_frontend/views/student_sections/student_active_jobs.dart';
+import 'package:stunio_frontend/views/student_sections/student_invited_jobs.dart';
 
 class StudentHomepage extends StatelessWidget {
   final int userId;
@@ -25,8 +27,8 @@ class StudentHomepage extends StatelessWidget {
             return Scaffold(
               body: Center(
               child: viewModel.currentIndex == 0
-                ? const Text("Active Jobs")
-                : const Text("Invited Jobs")
+                ? StudentActiveJobs(activeJobs: viewModel.activeJobs!)
+                : StudentInvitedJobs(invitedJobs: viewModel.invitedJobs!, viewModel: viewModel)
               ),
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: viewModel.currentIndex,

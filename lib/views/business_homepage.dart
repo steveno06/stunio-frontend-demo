@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stunio_frontend/viewmodels/business_home_viewmodel.dart';
+import 'package:stunio_frontend/views/business_sections/business_jobs.dart';
+import 'package:stunio_frontend/views/business_sections/create_business_job.dart';
 
 class BusinessHomepage extends StatelessWidget {
   final int userId;
@@ -24,7 +26,7 @@ class BusinessHomepage extends StatelessWidget {
           }
           return Scaffold(
             body: Center(
-              child: Text("${viewModel.jobs!.length}"),
+              child: BusinessJobs(jobs: viewModel.jobs!),
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: (){
@@ -38,7 +40,9 @@ class BusinessHomepage extends StatelessWidget {
                           maxWidth: MediaQuery.of(context).size.width * 0.9,
                           maxHeight: MediaQuery.of(context).size.height * 0.8,
                         ),
-                        child: Text("pop up")
+                        child: CreateBusinessJob(
+                          viewModel: viewModel, 
+                          onClose: () => Navigator.pop(context))
                       ),
                     );
                   },
