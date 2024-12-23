@@ -48,4 +48,28 @@ class StudentHomeViewmodel extends ChangeNotifier{
       return false;
     }
   }
+
+  Future<bool> acceptJob(int jobInviteId) async {
+    try {
+      final response = await _jobService.acceptJob(jobInviteId);
+      if(response){
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> declineJob(int jobInviteId) async {
+    try {
+      final response = await _jobService.declineJob(jobInviteId);
+      if(response){
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

@@ -28,7 +28,7 @@ class StudentHomepage extends StatelessWidget {
               body: Center(
               child: viewModel.currentIndex == 0
                 ? StudentActiveJobs(activeJobs: viewModel.activeJobs!)
-                : StudentInvitedJobs(invitedJobs: viewModel.invitedJobs!)
+                : StudentInvitedJobs(invitedJobs: viewModel.invitedJobs!, viewModel: viewModel)
               ),
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: viewModel.currentIndex,

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:stunio_frontend/models/job_model.dart';
 import 'package:stunio_frontend/services/job_service.dart';
 

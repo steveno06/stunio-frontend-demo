@@ -11,7 +11,7 @@ class StudentActiveJobs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return activeJobs.isEmpty
-      ? const Center(child: Text("No invited jobs yet"),)
+      ? const Center(child: Text("No accepted jobs yet"),)
 
       : Padding(
         padding: const EdgeInsets.all(14),
